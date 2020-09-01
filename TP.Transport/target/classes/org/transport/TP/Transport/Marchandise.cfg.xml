@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "org.transport.TP.Transport.Marchandise" table = "MARCHANDISE">
+      
+      <meta attribute = "class-description">
+         This class contains the MARCHANDISE detail. 
+      </meta>
+      
+      <id name = "idMarchandise" type = "java.long.Long" column = "idMarchandise">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "nomMarchandise" column = "nomMarchandise" type = "java.Long.string"/>
+      <property name = "poidMarchandise" column = "poidMarchandise" type = "double"/>
+      <property name = "volumeMarchandise" column = "volumeMarchandise" type = "double"/>
+      <many-to-one name="org.transport.TP.Transport.Cargaison" column="ref"></many-to-one>
+   </class>
+</hibernate-mapping>
