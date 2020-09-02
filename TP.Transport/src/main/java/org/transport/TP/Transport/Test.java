@@ -13,12 +13,17 @@ public class Test {
 		// TODO Auto-generated method stub	
 		HibernateUtil.getSessionFactory();
 		InterfaceTransport MT= new MetierTransport();
-		Cargaison CA= new CargaisonAerienne("Aerienne", 12.3, new Date(),200.3);
-		MT.ajouterCargaison(CA); 
-		Cargaison CR= new CargaisonRoutiere("Routiere", 12.3, new Date(),20.5);
-		MT.ajouterCargaison(CR); 
-		Marchandise M= new Marchandise("livre", 12.3, 10.2) ;
-		MT.ajouterMarchandise(M);
+		MT.ajouterCargaison(new CargaisonAerienne("CA1", 12.3, new Date(),200.3)); 
+		MT.ajouterCargaison(new CargaisonAerienne("CA2", 20.4, new Date(),4.5)); 
+		MT.ajouterCargaison(new CargaisonRoutiere("CR1", 12.3, new Date(),20.5)); 
+
+		
+
+		MT.ajouterMarchandiseCargaison(new Marchandise("Livres",500.1,60.2),"CA1");
+		MT.ajouterMarchandiseCargaison(new Marchandise("Ordinateurs",300.2,40.2),"CA1");
+		MT.ajouterMarchandiseCargaison(new Marchandise("Voitures",300.2,85.2),"CA2");
+		MT.ajouterMarchandiseCargaison(new Marchandise("souries",700.1,62),"CR1");
+		///MT.ajouterMarchandise(M);
 		System.out.println("eeeeeee");
 
 	}

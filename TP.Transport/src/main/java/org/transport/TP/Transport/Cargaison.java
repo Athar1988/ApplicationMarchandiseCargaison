@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ import org.transport.TP.Transport.*;
 @Entity
 @Table(name = "CARGAISON")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Type_carg", discriminatorType = DiscriminatorType.STRING, length=2)
+//@DiscriminatorColumn(name="Type_carg", discriminatorType = DiscriminatorType.STRING, length=2)
 
 public abstract  class Cargaison implements Serializable {
 	@Id

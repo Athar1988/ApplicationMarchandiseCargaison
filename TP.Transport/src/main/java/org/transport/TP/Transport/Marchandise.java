@@ -39,7 +39,7 @@ public class Marchandise implements Serializable {
 	public Marchandise() {
 		super();
 	}
-	public Marchandise(String nomMarchandise, double poidMarchandise, double volumeMarchandise) {
+	public Marchandise( String nomMarchandise, double poidMarchandise, double volumeMarchandise) {
 		super();
 		this.nomMarchandise = nomMarchandise;
 		this.poidMarchandise = poidMarchandise;

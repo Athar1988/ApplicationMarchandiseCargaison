@@ -13,7 +13,5 @@ public interface InterfaceTransport {
 	public List<Marchandise>  getMarchandiseCargaison(String idC);
 	public List<Marchandise> getMarchandiseMotcle(String motcle);
 	public Cargaison getCargaison(String idC);
-	public void supprilmerMarchandise(Long idMarchandise);
-	void ajouterMarchandise(Marchandise M);
-	
+	public void supprilmerMarchandise(Long idMarchandise);	
 }

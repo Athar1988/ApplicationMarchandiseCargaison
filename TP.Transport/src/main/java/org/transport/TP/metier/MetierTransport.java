@@ -29,9 +29,12 @@ public class MetierTransport implements InterfaceTransport{
 		}
 
 	@Override
-	public void ajouterMarchandise(Marchandise M) {
+	public void ajouterMarchandiseCargaison(Marchandise M, String refCarg) {
 	        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	        session.beginTransaction();
+	        Cargaison C =(Cargaison)session.get(Cargaison.class, refCarg);
+	        //associer les objets dans les 2 sens relation bi-relationnelle
+	        M.setCargaison(C);C.getMarchandise().add(M);
 	        try {
 	        session.save(M);
 	        }catch(Exception e){
@@ -41,25 +44,6 @@ public class MetierTransport implements InterfaceTransport{
 	        session.getTransaction().commit();
 		}
 
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void ajouterMarchandiseCargaison(Marchandise M, String idC) {
-		  Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	        session.beginTransaction();
-	        try {
-	        Query requete1=session.createQuery("select c.marchandise from Cargaison c where  c.id="+idC);
-	        Set<Marchandise>  Listmarch=(Set<Marchandise>) requete1.getResultList();
-	        Listmarch.add(M);
-	        Query requete2=session.createQuery("update Cargaison set marchandise =:march");
-	        requete2.setParameter("march", Listmarch);
-	        }catch(Exception e){
-	        	session.getTransaction().rollback();
-	        	e.printStackTrace();
-	        }
-	        session.getTransaction().commit();
-		
-	}
 
 	public List<Cargaison> getTousCargaison() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -76,7 +60,7 @@ public class MetierTransport implements InterfaceTransport{
 	public List<Marchandise> getMarchandiseCargaison(String idC) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query req=session.createQuery("select c.marchandise from Cargaison c where  c.id like :id");
+        Query req=session.createQuery("select m from Marchandise m where  m.Cargaison.Ref_carg=:x");
         req.setParameter("x", idC);
         List<Marchandise>  march=req.getResultList();
         session.getTransaction().commit();
@@ -96,20 +80,22 @@ public class MetierTransport implements InterfaceTransport{
 	}
 
 	@Override
-	public Cargaison getCargaison(String idC) {
+	public Cargaison getCargaison(String refCarg) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Query req=session.createQuery("select c from Cargaison c where c.id="+idC);
-        Cargaison carg=(Cargaison) req.getParameters();
+      /*  Query req=session.createQuery("select c from Cargaison c where c.Ref_carg=x");
+        req.setParameter("x", refCarg);
+        Cargaison carg=(Cargaison) req.getParameters();*/
+        Cargaison carg1=(Cargaison) session.get(Cargaison.class, refCarg);
         session.getTransaction().commit();		
-        return carg;
+        return carg1;
 	}
 
 	@Override
 	public void supprilmerMarchandise(Long idMarchandise) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Object o=session.get(Marchandise.class, idMarchandise);
+        Marchandise o=session.get(Marchandise.class, idMarchandise);
         if(o==null) throw new RuntimeException("Marchandise introuvable");
         session.delete(o);
         session.getTransaction().commit();
