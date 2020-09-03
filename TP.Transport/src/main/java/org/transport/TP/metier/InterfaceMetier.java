@@ -1,11 +1,11 @@
-package org.transport.TP.Transport;
+package org.transport.TP.metier;
 
 import java.util.List;
-import java.util.Set;
 
+import org.transport.TP.Transport.Cargaison;
+import org.transport.TP.Transport.Marchandise;
 
-
-public interface InterfaceTransport {
+public interface InterfaceMetier {
 	public void ajouterCargaison(Cargaison C);
 	public void ajouterMarchandiseCargaison(Marchandise M, String idC);
 	public List<Cargaison> getTousCargaison();

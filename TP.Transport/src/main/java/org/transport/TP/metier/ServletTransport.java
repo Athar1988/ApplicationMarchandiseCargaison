@@ -15,7 +15,7 @@ import org.transport.TP.Transport.CargaisonAerienne;
 import org.transport.TP.Transport.InterfaceTransport;
 
 public class ServletTransport extends HttpServlet{
-	InterfaceTransport IT;
+	private InterfaceMetier IT;
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub

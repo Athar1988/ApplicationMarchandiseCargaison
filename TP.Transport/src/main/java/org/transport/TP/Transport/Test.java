@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub	
 		HibernateUtil.getSessionFactory();
-		InterfaceTransport MT= new MetierTransport();
+		InterfaceTransport MT= new TransportDao();
 		MT.ajouterCargaison(new CargaisonAerienne("CA1", 12.3, new Date(),200.3)); 
 		MT.ajouterCargaison(new CargaisonAerienne("CA2", 20.4, new Date(),4.5)); 
 		MT.ajouterCargaison(new CargaisonRoutiere("CR1", 12.3, new Date(),20.5)); 

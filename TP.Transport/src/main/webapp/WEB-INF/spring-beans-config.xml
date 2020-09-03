@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="TD" class="org.transport.TP.Transport.TransportDao"></bean>
+<bean id="MT" class="org.transport.TP.metier.MetierTransport" init-method="init">
+<property name="idao" ref="TD"></property>
+</bean>
+</beans>

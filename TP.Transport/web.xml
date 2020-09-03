@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>TP.Transport</display-name>
+ 
+ <!--   l'événement déclenche-->
+	<context-param>
+        <param-name>ContextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring-beans-config.xml</param-value>
+    </context-param>
+ 	<!--un objet listener est un objet qui écoute certains événements dans une application. 
+ 	Lorsque l'événement qu'il écoute se déclenche, alors ce listener s'active  --> 
+    <listener>
+   		 <listener-class>
+		org.springframework.web.context.ContextLoaderListener
+   		 </listener-class>
+  	</listener>
+  
+  
+  
+  
+  <!-- declarartion du controleur principale -->
+		<servlet>
+			<servlet-name>action</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	          <init-param>
+	          <!-- le controleur princcipale besoin de fichier configuration -->
+				<param-name>ContextConfigLocation</param-name>
+				<param-value>/WEB-INF/springMVC.xml</param-value>
+			  </init-param>
+		</servlet>
+	
+	
+	
+	<!-- pour appel le controleur -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+  
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>Vue.jsp</welcome-file>
-        </welcome-file-list>
+    <welcome-file-list><welcome-file>index.do</welcome-file></welcome-file-list>
+    <!-- Securite avec authentification -->
+    <security-constraint>
+     <web-resource-collection>
+       <web-resource-name>action</web-resource-name>
+       <url-pattern>*.do</url-pattern>
+       <http-method>GET</http-method>
+     </web-resource-collection>
+     <auth-constraint>
+     <role-name>manger</role-name>
+     </auth-constraint>
+</security-constraint>
+<!-- <login-config><auth-method>BASIC</auth-method>
+<realm-name>Authetification de securiteBasic du servlet</realm-name></login-config> -->
+<login-config>
+<auth-method>Form</auth-method>
+<form-login-config>
+<form-login-page>/login.html</form-login-page>
+<form-error-page>/login.html</form-error-page>
+</form-login-config>
+
+</login-config>
+
     </web-app>
